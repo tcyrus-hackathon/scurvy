@@ -53,7 +53,7 @@ def register():
     return render_template('forms/register.html', form=form)
 
 @app.route('/watch')
-@login_required
+#@login_required
 def watch():
     return render_template('pages/watch.html')
 
