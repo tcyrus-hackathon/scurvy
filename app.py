@@ -9,6 +9,16 @@ app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
 
+# Login required decorator.
+def login_required(test):
+    @wraps(test)
+    def wrap(*args, **kwargs):
+        if 'name' in session:
+            return test(*args, **kwargs)
+        else:
+            return redirect(url_for('login'))
+    return wrap
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     session.remove()
@@ -22,12 +32,12 @@ def about():
     return render_template('pages/about.html')
 
 @app.route('/videos')
-#@login_required
+@login_required
 def videos():
     return render_template('pages/videos.html')
 
 @app.route('/watch')
-#@login_required
+@login_required
 def watch():
     return render_template('pages/watch.html')
 
@@ -64,9 +74,9 @@ def register():
         return render_template('forms/register.html', form=form)
 
 @app.route('/logout')
+@login_required
 def logout():
-    if 'email' not in session: return redirect(url_for('login'))
-    session.pop('email', None)
+    session.pop('name', None)
     return redirect(url_for('index'))
 
 @app.errorhandler(500)

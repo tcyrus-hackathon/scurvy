@@ -9,7 +9,7 @@ from moviepy.editor import VideoFileClip
 
 os.chdir("videos")
 
-def encrypt_video(filename, userinfo):
+def encrypt_video(filename, username):
 	# Orignal Video
 	original = VideoFileClip(filename+".mp4")
 	t0 = 56
@@ -20,7 +20,7 @@ def encrypt_video(filename, userinfo):
 	original.save_frame("frame.png", t=t0)
 
 	img = Image.open("frame.png").convert(mode='RGB')
-	stepic.encode_inplace(img, userinfo)
+	stepic.encode_inplace(img, username)
 	msg = stepic.decode(img)
 	print(msg)
 	img.save("frame.png")
@@ -32,8 +32,7 @@ def encrypt_video(filename, userinfo):
 								  second_half.set_start(t0+1)])
 
 	# Write the result to a file (many options available !)
-	new_mov.write_videofile("modified_"+filename+".avi", codec='png')
+	new_mov.write_videofile("static/"+username+"_"+filename+".avi", codec='png')
 
-
-encrypt_video("gangnam_style", "ayylmao")
-
+if __name__ == '__main__':
+	encrypt_video("gangnam_style", "ayylmao")
