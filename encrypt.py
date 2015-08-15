@@ -4,7 +4,7 @@ import sys
 import os
 
 from moviepy.editor import *
-import moviepy.editor as mpy 
+import moviepy.editor as mpy
 from moviepy.editor import VideoFileClip
 
 os.chdir("videos")
@@ -35,4 +35,5 @@ def encrypt_video(filename, userinfo):
 	new_mov.write_videofile("modified_"+filename+".avi", codec='png')
 
 
-encrypt_video("gangnam_style", "oolmao")
+encrypt_video("gangnam_style", "ayylmao")
+
