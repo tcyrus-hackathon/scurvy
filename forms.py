@@ -17,7 +17,7 @@ class RegisterForm(Form):
     confirm = PasswordField(
         'Repeat Password',
         [Required(),
-        EqualTo('password', message='Passwords must match')]
+        EqualTo('password', message='Passwords Must Match')]
     )
 
     def __init__(self, *args, **kwargs):
@@ -26,11 +26,11 @@ class RegisterForm(Form):
     def validate(self):
         if Form.validate(self):
             user = User.query.filter_by(username = self.name.data.lower()).first()
-
             if user:
-                flash("That username is already taken")
+                flash("That Username is already taken")
                 return False
             return True
+        #TODO: Fix Auth
         return True
 
 class LoginForm(Form):
@@ -41,10 +41,11 @@ class LoginForm(Form):
         Form.__init__(self, *args, **kwargs)
 
     def validate(self):
-        if not Form.validate(self): return False
-
-        user = User.query.filter_by(username = self.name.data.lower()).first()
-        if user and user.check_password(self.password.data): return True
-        else:
-            flash("Invalid e-mail or password")
-            return False
+        if Form.validate(self):
+            user = User.query.filter_by(username = self.name.data.lower()).first()
+            if user and user.password == self.password.data: return True
+            else:
+                flash("Invalid e-mail or password")
+                return False
+        #TODO: Fix Auth
+        return True

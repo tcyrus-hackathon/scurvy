@@ -1,4 +1,5 @@
 import logging, os
+from functools import wraps
 from flask import Flask, render_template, request, flash, session, redirect, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from logging import Formatter, FileHandler
@@ -43,7 +44,7 @@ def videos():
 def watch():
     filename = request.args.get('video')
     username = session['name']
-    encrypt_video(video, name)
+    encrypt_video(filename, username)
     return render_template('pages/watch.html', **locals())
 
 @app.route('/login', methods=['GET', 'POST'])
