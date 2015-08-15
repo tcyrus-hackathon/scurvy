@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="navbar-static-top.css" rel="stylesheet">
+    <link href="bootstrap/css/styles.css" rel="stylesheet"/>
+
+	<script>
+    var jumboHeight = $('.jumbotron').outerHeight();
+		function parallax(){
+    	var scrolled = $(window).scrollTop();
+    	$('.bg').css('height', (jumboHeight-scrolled) + 'px');
+		}
+
+	$(window).scroll(function(e){
+    parallax();
+	});
+
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+ 
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+      $('.dropdown').on('show.bs.dropdown', function(e){
+    	$(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+  		});
+
+  // ADD SLIDEUP ANIMATION TO DROPDOWN //
+  	$('.dropdown').on('hide.bs.dropdown', function(e){
+    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+  	});
+
+  	</script>
+
+	<style>
+	h1{
+		color:white;
+		/*font-family: "League Gothic Condensed";
+		src: url('../webfonts/leaguegothic-condensed-regular-webfont.ttf') format('truetype'); */
+		font-family: 'Heiti SC';
+	}
+
+	h2{
+		color:white;
+		font-family: 'Heiti SC';
+
+	}
+
+	h3{
+		color:white;
+		font-family: 'Heiti SC';
+		font-size:150%;
+	}
+
+	h4{
+		color:white;
+		font-family: 'Heiti SC';
+	}
+
+
+	</style>
+
+
+
+<title>DUMMY STREAM</title>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</head>
+
+
+
+<body>
+
+<div class="bg"></div>
+<div class="jumbotron">
+
+  <div class="container">
+  	<div class="row">
+  		<div class="col-md-12">
+  			<center>
+  				<h1>STEAM SITE</h1>
+  			</center>
+  		</div>
+  	</div>
+  </div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="panel panel-default">
+  			<div class="panel-body">
+                <h1><center>VIDEO STREAM</center></h1>
+  			</div>
+		</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+  <div class="container-fluid">
+	<ul class="copyright">
+      <a class="copyright">
+      </a>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+</div>
+
+
+
+
+
+</body>
+
+</html>

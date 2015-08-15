@@ -1,0 +1,106 @@
+.bg {
+  background-color:black;
+  opacity: 0.7;
+  position: fixed;
+  width: 100%;
+  height: 900px; /*same height as jumbotron */
+  top:0;
+  left:0;
+  bottom: 1;
+  z-index: -1;
+}
+
+.jumbotron {
+  padding-top: 100px;
+  padding-left: 30px;
+  height: 350px;
+  color: white;
+  text-shadow: #444 0 2px 2px;
+  background:transparent;
+}
+
+.panel-body {
+background:black;
+opacity: 0.7;
+}
+
+.panelholder{
+  background: black;
+}
+
+.progress {background: rgba(245, 245, 245, 1); border: 0px solid rgba(245, 245, 245, 1); border-radius: 4px; height: 20px;}
+.progress-bar-custom {background: rgba(8, 8, 8, 1);} 
+.progress-striped .progress-bar-custom {background-color: rgba(8, 8, 8, 1); background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255, 255, 255, 0.15),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255, 255, 255, 0.15)),color-stop(0.75,rgba(255, 255, 255, 0.15)),color-stop(0.75,transparent),to(transparent))); background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent); background-image: linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent); background-size: 40px 40px;}
+
+.copyright{
+  text-align: center;
+  padding-top: 10px;
+  min-height:32px;
+}
+
+.navbar{
+  height:10px;
+}
+
+.dropdown-menu{
+  width: 10px;
+  height: 180px;
+  padding-left: 2px;
+  background: black;
+  
+  color: white;
+}
+
+
+
+.btn-sample { 
+  color: #ffffff; 
+  background-color: #000000; 
+  border-color: #FFFFFF; 
+} 
+ 
+.btn-sample:hover, 
+.btn-sample:focus, 
+.btn-sample:active, 
+.btn-sample.active, 
+.open .dropdown-toggle.btn-sample { 
+  color: #ffffff; 
+  background-color: #8A8A8A; 
+  border-color: #FFFFFF; 
+} 
+ 
+.btn-sample:active, 
+.btn-sample.active, 
+.open .dropdown-toggle.btn-sample { 
+  background-image: none; 
+} 
+ 
+.btn-sample.disabled, 
+.btn-sample[disabled], 
+fieldset[disabled] .btn-sample, 
+.btn-sample.disabled:hover, 
+.btn-sample[disabled]:hover, 
+fieldset[disabled] .btn-sample:hover, 
+.btn-sample.disabled:focus, 
+.btn-sample[disabled]:focus, 
+fieldset[disabled] .btn-sample:focus, 
+.btn-sample.disabled:active, 
+.btn-sample[disabled]:active, 
+fieldset[disabled] .btn-sample:active, 
+.btn-sample.disabled.active, 
+.btn-sample[disabled].active, 
+fieldset[disabled] .btn-sample.active { 
+  background-color: #000000; 
+  border-color: #FFFFFF; 
+} 
+ 
+.btn-sample .badge { 
+  color: #000000; 
+  background-color: #ffffff; 
+}
+
+
+
+
+
+
