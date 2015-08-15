@@ -4,7 +4,7 @@ import sys
 import os
 
 from moviepy.editor import *
-import moviepy.editor as mpy 
+import moviepy.editor as mpy
 from moviepy.editor import VideoFileClip
 
 os.chdir("videos")
