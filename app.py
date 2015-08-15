@@ -1,5 +1,6 @@
 import logging, os
-from flask import Flask, render_template, request
+from functools import wraps
+from flask import Flask, render_template, request, redirect, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from logging import Formatter, FileHandler
 from models import db_session
@@ -18,7 +19,7 @@ def shutdown_session(exception=None):
 def login_required(test):
     @wraps(test)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session:
+        if 'user_id' in session:
             return test(*args, **kwargs)
         else:
             flash('You need to login first.')
