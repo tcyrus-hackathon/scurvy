@@ -52,11 +52,6 @@ def register():
         return redirect(url_for('watch'))
     return render_template('forms/register.html', form=form)
 
-@app.route('/forgot')
-def forgot():
-    form = ForgotForm(request.form)
-    return render_template('forms/forgot.html', form=form)
-
 @app.route('/watch')
 @login_required
 def watch():
