@@ -1,6 +1,6 @@
 # Import everything needed to edit video clips
 from moviepy.editor import *
-import moviepy.editor as mpy 
+import moviepy.editor as mpy
 from moviepy.editor import VideoFileClip
 
 # Orignal Video
@@ -11,9 +11,6 @@ clip = VideoFileClip("Her.mp4").subclip(55.99,56.05)
 
 # New Clip, ready to be modified
 frame = clip.save_frame("frame.png")
-
-
-
 
 newMov = CompositeVideoClip([orignal, frame])
 # Write the result to a file (many options available !)
