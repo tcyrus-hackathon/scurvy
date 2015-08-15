@@ -1,18 +1,9 @@
-#----------------------------------------------------------------------------#
-# Imports
-#----------------------------------------------------------------------------#
-
+import logging, os
 from flask import Flask, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
-import logging, os
 from logging import Formatter, FileHandler
-from forms import *
-
 from models import db_session
-
-#----------------------------------------------------------------------------#
-# App Config.
-#----------------------------------------------------------------------------#
+from forms import *
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -67,7 +58,7 @@ def forgot():
 
 @app.route('/watch')
 @login_required
-def about():
+def watch():
     return render_template('pages/watch.html')
 
 @app.errorhandler(500)
