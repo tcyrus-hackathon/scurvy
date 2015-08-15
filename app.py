@@ -1,80 +1,66 @@
-#----------------------------------------------------------------------------#
-# Imports
-#----------------------------------------------------------------------------#
-
-from flask import Flask, render_template, request
-# from flask.ext.sqlalchemy import SQLAlchemy
-import logging
+import logging, os
+from functools import wraps
+from flask import Flask, render_template, request, redirect, url_for
+from flask.ext.sqlalchemy import SQLAlchemy
 from logging import Formatter, FileHandler
+from models import db_session
 from forms import *
-
-#----------------------------------------------------------------------------#
-# App Config.
-#----------------------------------------------------------------------------#
 
 app = Flask(__name__)
 app.config.from_object('config')
-#db = SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 # Automatically tear down SQLAlchemy.
-'''
 @app.teardown_request
 def shutdown_session(exception=None):
     db_session.remove()
-'''
 
 # Login required decorator.
-'''
 def login_required(test):
     @wraps(test)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session:
+        if 'user_id' in session:
             return test(*args, **kwargs)
         else:
             flash('You need to login first.')
             return redirect(url_for('login'))
     return wrap
-'''
-#----------------------------------------------------------------------------#
-# Controllers.
-#----------------------------------------------------------------------------#
-
 
 @app.route('/')
 def home():
-    return render_template('pages/placeholder.home.html')
-
+    return render_template('pages/home.html')
 
 @app.route('/about')
 def about():
-    return render_template('pages/placeholder.about.html')
+    return render_template('pages/about.html')
 
+@app.route('/watch')
+#@login_required
+def watch():
+    return render_template('pages/watch.html')
 
 @app.route('/login')
 def login():
     form = LoginForm(request.form)
+    if form.validate_on_submit():
+        flash(u'Successfully logged in as %s' % form.user.username)
+        session['user_id'] = form.user.id
+        return redirect(url_for('watch'))
     return render_template('forms/login.html', form=form)
-
 
 @app.route('/register')
 def register():
     form = RegisterForm(request.form)
+    if form.validate_on_submit():
+        flash(u'Successfully registered as %s' % form.user.username)
+        session['user_id'] = form.user.id
+        return redirect(url_for('watch'))
     return render_template('forms/register.html', form=form)
-
-
-@app.route('/forgot')
-def forgot():
-    form = ForgotForm(request.form)
-    return render_template('forms/forgot.html', form=form)
-
-# Error handlers.
-
 
 @app.errorhandler(500)
 def internal_error(error):
-    #db_session.rollback()
+    db_session.rollback()
     return render_template('errors/500.html'), 500
-
 
 @app.errorhandler(404)
 def not_found_error(error):
@@ -90,17 +76,6 @@ if not app.debug:
     app.logger.addHandler(file_handler)
     app.logger.info('errors')
 
-#----------------------------------------------------------------------------#
-# Launch.
-#----------------------------------------------------------------------------#
-
-# Default port:
-if __name__ == '__main__':
-    app.run()
-
-# Or specify port manually:
-'''
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-'''
