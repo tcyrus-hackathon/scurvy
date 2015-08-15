@@ -27,8 +27,8 @@ def login_required(test):
     return wrap
 
 @app.route('/')
-def home():
-    return render_template('pages/home.html')
+def index():
+    return render_template('pages/index.html')
 
 @app.route('/about')
 def about():
