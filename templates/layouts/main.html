@@ -10,12 +10,13 @@
 <!-- /meta -->
 
 <!-- styles -->
-<link type="text/css" rel="stylesheet" href="/static/css/font-awesome-4.0.1.min.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/font-awesome-4.0.1.min.css">
 <link type="text/css" rel="stylesheet" href="/static/css/bootstrap-3.3.5.min.css">
-<link type="text/css" rel="stylesheet" href="/static/css/layout.main.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/main.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/main.responsive.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/main.quickfix.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/flat-ui-2.2.2.min.css">
+<link type="text/css" rel="stylesheet" href="/static/css/layout.main.css">
+<link type="text/css" rel="stylesheet" href="/static/css/main.css">
+<link type="text/css" rel="stylesheet" href="/static/css/main.responsive.css">
+<link type="text/css" rel="stylesheet" href="/static/css/main.quickfix.css">
 <!-- /styles -->
 
 <!-- favicons -->
@@ -53,18 +54,6 @@
           <ul class="nav navbar-nav">
             <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Home</a></li>
             <li {% if request.endpoint == 'about' %} class="active" {% endif %}><a href="{{ url_for('about') }}">About</a></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a>Action</a></li>
-                <li><a>Another action</a></li>
-                <li><a>Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a>Separated link</a></li>
-                <li><a>One more separated link</a></li>
-              </ul>
-            </li>
           </ul>
           <ul class="nav navbar-nav pull-right">
             <li><a href="{{ url_for('register') }}">Signup</a></li>
@@ -103,16 +92,10 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.10.2.min.js"><\/script>')</script>
-  <script defer src="/static/js/libs/bootstrap-3.3.5.min.js"></script>
-  <script defer src="/static/js/plugins.js"></script>
-  <script defer src="/static/js/script.js"></script>
-  <!-- Google Analytics - Change UA-XXXXX-X to be your site's ID -->
-  <script>
-  window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-  Modernizr.load({
-    load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-  });
-  </script>
-
+  <script type="text/javascript" src="/static/js/libs/video.js"></script>
+  <script type="text/javascript" src="/static/js/libs/flat-ui-2.2.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/libs/bootstrap-3.3.5.min.js" defer></script>
+  <script type="text/javascript" src="/static/js/plugins.js" defer></script>
+  <script type="text/javascript" src="/static/js/script.js" defer></script>
 </body>
 </html>
