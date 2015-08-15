@@ -1,0 +1,23 @@
+h1{
+	color:black;
+	/*font-family: "League Gothic Condensed";
+	src: url('../webfonts/leaguegothic-condensed-regular-webfont.ttf') format('truetype'); */
+	font-family: 'Heiti SC';
+}
+
+h2{
+	color:black;
+	font-family: 'Heiti SC';
+
+}
+
+h3{
+	color:black;
+	font-family: 'Heiti SC';
+	font-size:150%;
+}
+
+h4{
+	color:black;
+	font-family: 'Heiti SC';
+}
