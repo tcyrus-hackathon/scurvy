@@ -34,6 +34,11 @@ def home():
 def about():
     return render_template('pages/about.html')
 
+@app.route('/watch')
+#@login_required
+def watch():
+    return render_template('pages/watch.html')
+
 @app.route('/login')
 def login():
     form = LoginForm(request.form)
@@ -51,11 +56,6 @@ def register():
         session['user_id'] = form.user.id
         return redirect(url_for('watch'))
     return render_template('forms/register.html', form=form)
-
-@app.route('/watch')
-#@login_required
-def watch():
-    return render_template('pages/watch.html')
 
 @app.errorhandler(500)
 def internal_error(error):
