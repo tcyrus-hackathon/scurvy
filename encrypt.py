@@ -30,5 +30,3 @@ def encrypt_video(filename, username):
 
 	# Write the result to a file (many options available !)
 	new_mov.write_videofile("static/"+username+"_"+filename+".avi", codec='png')
-
-#encrypt_video("gangnam_style", "ayylmao")

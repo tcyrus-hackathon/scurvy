@@ -19,6 +19,7 @@ def login_required(test):
         if 'name' in session:
             return test(*args, **kwargs)
         else:
+            flash(u'You must login to access this page.')
             return redirect(url_for('login'))
     return wrap
 
@@ -54,10 +55,7 @@ def login():
         if form.validate() == False:
             return render_template('forms/login.html', form=form)
         else:
-            newuser = User(form.name.data, form.email.data, form.password.data)
-            session['name'] = newuser.name
-            db.session.add(newuser)
-            db.session.commit()
+            session['name'] = form.name.data
             flash(u'Successfully Logged In')
             return redirect(url_for('videos'))
     elif request.method == 'GET':
