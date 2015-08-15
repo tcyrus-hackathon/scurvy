@@ -36,7 +36,7 @@ def about():
 
 @app.route('/videos')
 #@login_required
-def watch():
+def videos():
     return render_template('pages/videos.html')
 
 @app.route('/watch')
