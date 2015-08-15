@@ -5,6 +5,8 @@ from logging import Formatter, FileHandler
 from models import db
 from forms import *
 
+from encrypt import encrypt_video
+
 app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
@@ -39,7 +41,10 @@ def videos():
 @app.route('/watch')
 @login_required
 def watch():
-    return render_template('pages/watch.html')
+    filename = request.args.get('video')
+    username = session['name']
+    encrypt_video(video, name)
+    return render_template('pages/watch.html', **locals())
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
