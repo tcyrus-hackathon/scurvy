@@ -54,10 +54,18 @@
           <ul class="nav navbar-nav">
             <li {% if request.endpoint == 'index' %} class="active" {% endif %}><a href="{{ url_for('index') }}">Home</a></li>
             <li {% if request.endpoint == 'about' %} class="active" {% endif %}><a href="{{ url_for('about') }}">About</a></li>
+            {% if 'name' in session %}
+            <li {% if request.endpoint == 'videos' %} class="active" {% endif %}><a href="{{ url_for('videos') }}">Videos</a></li>
+            {% endif %}
           </ul>
           <ul class="nav navbar-nav pull-right">
+            {% if 'name' in session %}
+            <li><a href="#">{{ session['name'] }}</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
             <li><a href="{{ url_for('register') }}">Signup</a></li>
             <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>

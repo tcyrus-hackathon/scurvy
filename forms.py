@@ -1,24 +1,50 @@
-from flask_wtf import Form
-from wtforms import TextField, PasswordField
-from wtforms.validators import DataRequired, EqualTo, Length
+from flask.ext.wtf import Form
+from wtforms.fields import TextField, SubmitField, PasswordField
+from wtforms.validators import Required, Length, EqualTo
+from models import db, User
 
 # Set your classes here.
 class RegisterForm(Form):
     name = TextField(
-        'Username', validators=[DataRequired(), Length(min=6, max=25)]
+        'Username', validators=[Required(), Length(min=6, max=25)]
     )
     email = TextField(
-        'Email', validators=[DataRequired(), Length(min=6, max=40)]
+        'Email', validators=[Required(), Length(min=6, max=40)]
     )
     password = PasswordField(
-        'Password', validators=[DataRequired(), Length(min=6, max=40)]
+        'Password', validators=[Required(), Length(min=6, max=40)]
     )
     confirm = PasswordField(
         'Repeat Password',
-        [DataRequired(),
+        [Required(),
         EqualTo('password', message='Passwords must match')]
     )
 
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+
+    def validate(self):
+        if Form.validate(self):
+            user = User.query.filter_by(username = self.name.data.lower()).first()
+
+            if user:
+                flash("That username is already taken")
+                return False
+            return True
+        return True
+
 class LoginForm(Form):
-    name = TextField('Username', [DataRequired()])
-    password = PasswordField('Password', [DataRequired()])
+    name = TextField('Username', [Required()])
+    password = PasswordField('Password', [Required()])
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+
+    def validate(self):
+        if not Form.validate(self): return False
+
+        user = User.query.filter_by(username = self.name.data.lower()).first()
+        if user and user.check_password(self.password.data): return True
+        else:
+            flash("Invalid e-mail or password")
+            return False

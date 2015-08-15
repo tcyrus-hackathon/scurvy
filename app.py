@@ -1,30 +1,17 @@
 import logging, os
-from functools import wraps
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from logging import Formatter, FileHandler
-from models import db_session
+from models import db
 from forms import *
 
 app = Flask(__name__)
 app.config.from_object('config')
-db = SQLAlchemy(app)
+db.init_app(app)
 
-# Automatically tear down SQLAlchemy.
-@app.teardown_request
+@app.teardown_appcontext
 def shutdown_session(exception=None):
-    db_session.remove()
-
-# Login required decorator.
-def login_required(test):
-    @wraps(test)
-    def wrap(*args, **kwargs):
-        if 'user_id' in session:
-            return test(*args, **kwargs)
-        else:
-            flash('You need to login first.')
-            return redirect(url_for('login'))
-    return wrap
+    session.remove()
 
 @app.route('/')
 def index():
@@ -44,23 +31,43 @@ def videos():
 def watch():
     return render_template('pages/watch.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
-    if form.validate_on_submit():
-        flash(u'Successfully logged in as %s' % form.user.username)
-        session['user_id'] = form.user.id
-        return redirect(url_for('videos'))
-    return render_template('forms/login.html', form=form)
+    if request.method == 'POST':
+        if form.validate() == False:
+            return render_template('forms/login.html', form=form)
+        else:
+            newuser = User(form.name.data, form.email.data, form.password.data)
+            session['name'] = newuser.name
+            db.session.add(newuser)
+            db.session.commit()
+            flash(u'Successfully Logged In')
+            return redirect(url_for('videos'))
+    elif request.method == 'GET':
+        return render_template('forms/login.html', form=form)
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm(request.form)
-    if form.validate_on_submit():
-        flash(u'Successfully registered as %s' % form.user.username)
-        session['user_id'] = form.user.id
-        return redirect(url_for('videos'))
-    return render_template('forms/register.html', form=form)
+    form = RegisterForm()
+    if request.method == 'POST':
+        if form.validate() == False:
+            return render_template('forms/register.html', form=form)
+        else:
+            newuser = User(form.name.data, form.email.data, form.password.data)
+            session['name'] = newuser.name
+            db.session.add(newuser)
+            db.session.commit()
+            flash(u'Successfully Registered')
+            return redirect(url_for('videos'))
+    elif request.method == 'GET':
+        return render_template('forms/register.html', form=form)
+
+@app.route('/logout')
+def logout():
+    if 'email' not in session: return redirect(url_for('login'))
+    session.pop('email', None)
+    return redirect(url_for('index'))
 
 @app.errorhandler(500)
 def internal_error(error):
