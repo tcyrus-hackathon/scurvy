@@ -23,21 +23,16 @@ def encrypt_video(filename, userinfo):
 	stepic.encode_inplace(img, userinfo)
 	msg = stepic.decode(img)
 	print(msg)
+	img.save("frame.png")
 
-	"""os.system("cp frame.png fame2.png")
-	encoded_clip = ImageClip('frame2.png', duration=1)
+	encoded_clip = ImageClip('frame.png', duration=1)
 
 	new_mov = CompositeVideoClip([first_half.set_start(0),
 								  encoded_clip.set_start(t0),
 								  second_half.set_start(t0+1)])
 
 	# Write the result to a file (many options available !)
-	new_mov.write_videofile("modified_"+filename+".mp4")
-	"""
-
-	img = Image.open("frame.png").convert(mode='RGB')
-	msg = stepic.decode(img)
-	print(msg)
+	new_mov.write_videofile("modified_"+filename+".avi", codec='png')
 
 
-encrypt_video("gangnam_style", "ayylmaoo")
+encrypt_video("gangnam_style", "oolmao")
