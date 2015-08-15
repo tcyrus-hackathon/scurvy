@@ -34,26 +34,30 @@ def login_required(test):
             return redirect(url_for('login'))
     return wrap
 
-#----------------------------------------------------------------------------#
-# Controllers.
-#----------------------------------------------------------------------------#
-
 @app.route('/')
 def home():
-    return render_template('pages/placeholder.home.html')
+    return render_template('pages/home.html')
 
 @app.route('/about')
 def about():
-    return render_template('pages/placeholder.about.html')
+    return render_template('pages/about.html')
 
 @app.route('/login')
 def login():
     form = LoginForm(request.form)
+    if form.validate_on_submit():
+        flash(u'Successfully logged in as %s' % form.user.username)
+        session['user_id'] = form.user.id
+        return redirect(url_for('watch'))
     return render_template('forms/login.html', form=form)
 
 @app.route('/register')
 def register():
     form = RegisterForm(request.form)
+    if form.validate_on_submit():
+        flash(u'Successfully registered as %s' % form.user.username)
+        session['user_id'] = form.user.id
+        return redirect(url_for('watch'))
     return render_template('forms/register.html', form=form)
 
 @app.route('/forgot')
@@ -61,7 +65,11 @@ def forgot():
     form = ForgotForm(request.form)
     return render_template('forms/forgot.html', form=form)
 
-# Error handlers.
+@app.route('/watch')
+@login_required
+def about():
+    return render_template('pages/watch.html')
+
 @app.errorhandler(500)
 def internal_error(error):
     db_session.rollback()
@@ -81,11 +89,6 @@ if not app.debug:
     app.logger.addHandler(file_handler)
     app.logger.info('errors')
 
-#----------------------------------------------------------------------------#
-# Launch.
-#----------------------------------------------------------------------------#
-
-# Specify port manually:
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
