@@ -34,6 +34,11 @@ def home():
 def about():
     return render_template('pages/about.html')
 
+@app.route('/videos')
+#@login_required
+def watch():
+    return render_template('pages/videos.html')
+
 @app.route('/watch')
 #@login_required
 def watch():
@@ -45,7 +50,7 @@ def login():
     if form.validate_on_submit():
         flash(u'Successfully logged in as %s' % form.user.username)
         session['user_id'] = form.user.id
-        return redirect(url_for('watch'))
+        return redirect(url_for('videos'))
     return render_template('forms/login.html', form=form)
 
 @app.route('/register')
@@ -54,7 +59,7 @@ def register():
     if form.validate_on_submit():
         flash(u'Successfully registered as %s' % form.user.username)
         session['user_id'] = form.user.id
-        return redirect(url_for('watch'))
+        return redirect(url_for('videos'))
     return render_template('forms/register.html', form=form)
 
 @app.errorhandler(500)

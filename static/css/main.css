@@ -42,5 +42,8 @@ a {
    height: 60px;
    background-color: #f5f5f5;
  }
+footer .container .text-muted {
+  margin: 20px 0;
+}
 
 /* Various other styles end */
