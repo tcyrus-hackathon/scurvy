@@ -10,10 +10,6 @@ from moviepy.editor import VideoFileClip
 from concurrent.futures import ProcessPoolExecutor as Pool
 
 def encrypt_video(filename, username):
-	for th in threading.enumerate():
-		if th.getName()==(username+"_"+filename): 
-			return
-
 	if os.path.isfile("static/"+username+"_"+filename+".avi"):
 		return
 
