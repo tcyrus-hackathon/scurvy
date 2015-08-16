@@ -67,7 +67,7 @@ def login():
             session['num'] = User.query.filter_by(name = form.name.data.lower()).first().num
             flash(u'Successfully Logged In')
 
-            for name in VID_NAMES:
+            for name in MOVIE_NAMES + SHOW_NAMES:
                 encrypt_video(name, form.name.data, session['num']) #async
 
             return redirect(url_for('videos'))
