@@ -34,10 +34,6 @@ def shutdown_session(exception=None):
 def index():
     return render_template('pages/index.html')
 
-@app.route('/about')
-def about():
-    return render_template('pages/about.html')
-
 @app.route('/videos')
 @login_required
 def videos():
@@ -62,7 +58,7 @@ def login():
             flash(u'Successfully Logged In')
 
             for name in VIDEOS:
-                encrypt_video(name, form.name.data)
+                encrypt_video(name, form.name.data) #async
 
             return redirect(url_for('videos'))
 

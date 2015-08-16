@@ -4,28 +4,43 @@
 
 <div class="container-fluid">
   <div class="row">
+
     <div class="col-md-4">
-      <a href="{{ url_for('watch') }}?video=gangnam_style">
-        <img src="/static/thumbnails/{{ filename }}.png" class="img-rounded center-block">
+      <a href="{{ url_for('watch') }}?video={{ file1 }}">
+        <img src="/static/thumbnails/{{ file1 }}.png" class="img-rounded center-block">
       </a>
     </div>
+
     <div class="col-md-4">
-      <img src="" class="img-rounded center-block">
+      <a href="{{ url_for('watch') }}?video={{ file2 }}">
+        <img src="/static/thumbnails/{{ file2 }}.png" class="img-rounded center-block">
+      </a>
     </div>
+
     <div class="col-md-4">
-      <img src="" class="img-rounded center-block">
+      <a href="{{ url_for('watch') }}?video={{ file3 }}">
+        <img src="/static/thumbnails/{{ file3 }}.png" class="img-rounded center-block">
+      </a>
     </div>
-  </div>
-  <div class="row">
+
     <div class="col-md-4">
-      <img src="" class="img-rounded center-block">
+      <a href="{{ url_for('watch') }}?video={{ file4 }}">
+        <img src="/static/thumbnails/{{ file4 }}.png" class="img-rounded center-block">
+      </a>
     </div>
+
     <div class="col-md-4">
-      <img src="" class="img-rounded center-block">
+      <a href="{{ url_for('watch') }}?video={{ file5 }}">
+        <img src="/static/thumbnails/{{ file5 }}.png" class="img-rounded center-block">
+      </a>
     </div>
+
     <div class="col-md-4">
-      <img src="" class="img-rounded center-block">
+      <a href="{{ url_for('watch') }}?video={{ file6 }} ">
+        <img src="/static/thumbnails/{{ file6 }}.png" class="img-rounded center-block">
+      </a>
     </div>
+
   </div>
 </div>
 

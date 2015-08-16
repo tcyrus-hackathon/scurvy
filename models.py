@@ -12,6 +12,6 @@ class User(db.Model):
     password = db.Column(db.String(30))
 
     def __init__(self, name, email, password):
-        self.name = name
+        self.name = name.lower()
         self.email = email.lower()
         self.password = password
