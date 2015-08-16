@@ -18,20 +18,20 @@ def encrypt_video(filename, username, t0):
 
 def video(filename, username, t0):
 	# Orignal Video
-	original = VideoFileClip("videos/"+filename+".mp4")
+	original = VideoFileClip("static/videos/"+filename+".mp4")
 
-	first_half = VideoFileClip("videos/"+filename+".mp4").subclip(0, t0)
-	second_half = VideoFileClip("videos/"+filename+".mp4").subclip(t0+1, original.duration)
+	first_half = VideoFileClip("static/videos/"+filename+".mp4").subclip(0, t0)
+	second_half = VideoFileClip("static/videos/"+filename+".mp4").subclip(t0+1, original.duration)
 
-	original.save_frame("videos/frame.png", t=t0)
+	original.save_frame("static/videos/frame.png", t=t0)
 
-	img = Image.open("videos/frame.png").convert(mode='RGB')
+	img = Image.open("static/videos/frame.png").convert(mode='RGB')
 	stepic.encode_inplace(img, username)
 	msg = stepic.decode(img)
 	print(msg)
-	img.save("videos/frame.png")
+	img.save("static/videos/frame.png")
 
-	encoded_clip = ImageClip('videos/frame.png', duration=1)
+	encoded_clip = ImageClip('static/videos/frame.png', duration=1)
 
 	new_mov = CompositeVideoClip([first_half.set_start(0),
 								  encoded_clip.set_start(t0),
