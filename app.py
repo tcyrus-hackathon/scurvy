@@ -89,7 +89,7 @@ def register():
             for name in MOVIE_NAMES + SHOW_NAMES:
                 encrypt_video(name, form.name.data, session['num']) #async
 
-            return redirect(url_for('videos'))
+            return redirect(url_for('movies'))
             
     elif request.method == 'GET':
         return render_template('forms/register.html', form=form)
