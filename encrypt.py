@@ -9,17 +9,16 @@ from moviepy.editor import VideoFileClip
 
 from concurrent.futures import ProcessPoolExecutor as Pool
 
-def encrypt_video(filename, username):
+def encrypt_video(filename, username, t0):
 	if os.path.isfile("static/"+username+"_"+filename+".avi"):
 		return
 
 	executor = Pool(max_workers=4)
 	executor.submit(video, filename, username)
 
-def video(filename, username):
+def video(filename, username, t0):
 	# Orignal Video
 	original = VideoFileClip("videos/"+filename+".mp4")
-	t0 = 56
 
 	first_half = VideoFileClip("videos/"+filename+".mp4").subclip(0, t0)
 	second_half = VideoFileClip("videos/"+filename+".mp4").subclip(t0+1, original.duration)
