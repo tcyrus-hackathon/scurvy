@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
 
-VIDEOS = ['gangnam_style']
+VID_NAMES = ['gangnam_style'] * 6
 
 # Login required decorator.
 def login_required(test):
@@ -37,7 +37,8 @@ def index():
 @app.route('/videos')
 @login_required
 def videos():
-    return render_template('pages/videos.html')
+    vid_names = VID_NAMES
+    return render_template('pages/videos.html', **locals())
 
 @app.route('/watch')
 @login_required
