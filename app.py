@@ -57,6 +57,7 @@ def login():
         else:
             session['name'] = form.name.data
             flash(u'Successfully Logged In')
+            encrypt_video("gangnam_style", form.name.data)
             return redirect(url_for('videos'))
     elif request.method == 'GET':
         return render_template('forms/login.html', form=form)
