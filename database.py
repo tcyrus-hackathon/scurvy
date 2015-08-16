@@ -16,10 +16,13 @@ class User(Base):
     name = Column(String(120), unique=True)
     email = Column(String(120), unique=True)
     password = Column(String(30))
+    num = Column(Integer)
 
-    def __init__(self, name=None, email=None):
+    def __init__(self, name=None, email=None, password=None, num=None):
         self.name = name
         self.email = email
+        self.password = password
+        self.num = num
 
     def __repr__(self):
         return '<User %r>' % (self.name)

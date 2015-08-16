@@ -54,11 +54,12 @@ def login():
         if form.validate() == False:
             return render_template('forms/login.html', form=form)
         else:
-            session['name'] = form.name.data
+            session['name'] = form.name.data.lower()
+            session['num'] = User.query.filter_by(name = form.name.data.lower()).first().num
             flash(u'Successfully Logged In')
 
             for name in VIDEOS:
-                encrypt_video(name, form.name.data) #async
+                encrypt_video(name, form.name.data, session['num']) #async
 
             return redirect(url_for('videos'))
 
@@ -74,9 +75,14 @@ def register():
         else:
             newuser = User(form.name.data, form.email.data, form.password.data)
             session['name'] = newuser.name
+            session['num'] = newuser.num
             db.session.add(newuser)
             db.session.commit()
             flash(u'Successfully Registered')
+
+            for name in VIDEOS:
+                encrypt_video(name, form.name.data, session['num']) #async
+
             return redirect(url_for('videos'))
             
     elif request.method == 'GET':
