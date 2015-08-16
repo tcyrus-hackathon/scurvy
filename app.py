@@ -7,7 +7,7 @@ from logging import Formatter, FileHandler
 from models import db
 from forms import *
 from random import sample
-from encrypt import encrypt_video 
+from encrypt import encrypt_video
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -67,7 +67,7 @@ def login():
             session['num'] = User.query.filter_by(name = form.name.data.lower()).first().num
             flash(u'Successfully Logged In')
 
-            return redirect(url_for('videos'))
+            return redirect(url_for('movies'))
 
     elif request.method == 'GET':
         return render_template('forms/login.html', form=form)
@@ -90,7 +90,7 @@ def register():
                 encrypt_video(name, form.name.data, session['num']) #async
 
             return redirect(url_for('movies'))
-            
+
     elif request.method == 'GET':
         return render_template('forms/register.html', form=form)
 
