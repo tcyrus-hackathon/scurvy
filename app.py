@@ -13,8 +13,8 @@ app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
 
-MOVIE_NAMES = ['gangnam_style'] * 9
-SHOW_NAMES = ['gangnam_style'] * 9
+MOVIE_NAMES = (['pokemon'] * 8) + ['gangnam_style']
+SHOW_NAMES = (['pokemon'] * 8) + ['gangnam_style']
 
 # Login required decorator.
 def login_required(test):
