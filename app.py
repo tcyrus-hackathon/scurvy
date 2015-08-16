@@ -31,10 +31,6 @@ def shutdown_session(exception=None):
 def index():
     return render_template('pages/index.html')
 
-@app.route('/about')
-def about():
-    return render_template('pages/about.html')
-
 @app.route('/videos')
 @login_required
 def videos():
