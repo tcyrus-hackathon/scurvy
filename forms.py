@@ -1,3 +1,4 @@
+from flask import flash
 from flask.ext.wtf import Form
 from wtforms.fields import TextField, SubmitField, PasswordField
 from wtforms.validators import Required, Length, EqualTo
@@ -25,13 +26,12 @@ class RegisterForm(Form):
 
     def validate(self):
         if Form.validate(self):
-            user = User.query.filter_by(username = self.name.data.lower()).first()
+            user = User.query.filter_by(name = self.name.data.lower()).first()
             if user:
-                flash("That Username is already taken")
+                flash("That username is already taken.")
                 return False
             return True
-        #TODO: Fix Auth
-        return True
+        return False
 
 class LoginForm(Form):
     name = TextField('Username', [Required()])
@@ -42,10 +42,9 @@ class LoginForm(Form):
 
     def validate(self):
         if Form.validate(self):
-            user = User.query.filter_by(username = self.name.data.lower()).first()
+            user = User.query.filter_by(name = self.name.data.lower()).first()
             if user and user.password == self.password.data: return True
             else:
-                flash("Invalid e-mail or password")
+                flash("Invalid username or password.")
                 return False
-        #TODO: Fix Auth
-        return True
+        return False
