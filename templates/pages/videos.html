@@ -5,43 +5,49 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <a href="{{ url_for('watch') }}?video={{ vid_names[0] }}">
         <img src="/static/thumbnails/{{ vid_names[0] }}.png" class="img-rounded center-block">
       </a>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <a href="{{ url_for('watch') }}?video={{ vid_names[1] }}">
         <img src="/static/thumbnails/{{ vid_names[1] }}.png" class="img-rounded center-block">
       </a>
     </div>
 
-    <div class="col-md-4">
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6">
       <a href="{{ url_for('watch') }}?video={{ vid_names[3] }}">
         <img src="/static/thumbnails/{{ vid_names[2] }}.png" class="img-rounded center-block">
       </a>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <a href="{{ url_for('watch') }}?video={{ vid_names[4] }}">
         <img src="/static/thumbnails/{{ vid_names[3] }}.png" class="img-rounded center-block">
       </a>
     </div>
+  </div>
 
-    <div class="col-md-4">
+  <div class="row">
+    <div class="col-md-6">
       <a href="{{ url_for('watch') }}?video={{ vid_names[5] }}">
         <img src="/static/thumbnails/{{ vid_names[4] }}.png" class="img-rounded center-block">
       </a>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <a href="{{ url_for('watch') }}?video={{ vid_names[6] }} ">
         <img src="/static/thumbnails/{{ vid_names[5] }}.png" class="img-rounded center-block">
       </a>
     </div>
-
   </div>
+  
 </div>
 
 {% endblock %}
