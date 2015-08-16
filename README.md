@@ -1,3 +1,3 @@
-# Anti-Piracy Video Tool
+# Hack The Planet 2015 - Scurvy - A Piracy-Proof Media Streaming Platform
 
-This is the upcoming application that utilizes [steganography](https://en.wikipedia.org/wiki/Steganography) to fight piracy. The idea is to embed user information into a video which can be used to detect later on whether that video is in the wrong hands.
+This application utilizes [steganography](https://en.wikipedia.org/wiki/Steganography) to fight internet piracy. The idea is to embed the user's information into the video so that it can be used to track where pirated videos were created.
