@@ -1,12 +1,17 @@
 from PIL import Image
-import stepic
-import sys
+import stepic, sys, os, threading
 
 from moviepy.editor import *
 import moviepy.editor as mpy
 from moviepy.editor import VideoFileClip
 
 def encrypt_video(filename, username):
+	for th in threading.enumerate():
+		if th.getName()==(username+"_"+filename): return
+	if os.path.isfile("static/"+username+"_"+filename+".avi"): return
+	threading.Thread(target=video, args=(filename,username), name=(username+"_"+filename)).start()
+
+def video(filename, username):
 	# Orignal Video
 	original = VideoFileClip("videos/"+filename+".mp4")
 	t0 = 56
