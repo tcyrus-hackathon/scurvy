@@ -36,73 +36,114 @@
 </head>
 <body>
 
-  <!-- Wrap all page content here -->
-  <div id="wrap">
+	<!-- Wrap all page content here -->
+	<div id="wrap">
 
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Scurvy</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li {% if request.endpoint == 'index' %} class="active" {% endif %}><a href="{{ url_for('index') }}">Home</a></li>
-            {% if 'name' in session %}
-            <li {% if request.endpoint == 'videos' %} class="active" {% endif %}><a href="{{ url_for('videos') }}">Videos</a></li>
-            {% endif %}
-          </ul>
-          <ul class="nav navbar-nav pull-right">
-            {% if 'name' in session %}
-            <li><a href="#">{{ session['name'] }}</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            {% else %}
-            <li><a href="{{ url_for('register') }}">Signup</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            {% endif %}
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
 
-    <!-- Begin page content -->
-    <main id="content" role="main" class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					
+					<a class="navbar-brand" href="/">
+						<img style="max-height:55px; margin-top:-15px; " src="static/ico/lemon.svg"> </img>
+					</a>
 
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-block alert-error fade in">
-              <a class="close" data-dismiss="alert">&times;</a>
-              {{ message }}
-            </div>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
 
-      {% block content %}{% endblock %}
+					<a class="navbar-brand" href="/">
+						<span style="display:inline; margin-left:0px;"> Scurvy </span>
+					</a>
 
-    </main>
+				</div>
 
-  </div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
 
-  <footer class="footer">
-    <div class="container">
-      <p class="text-muted">&copy; 2015 AntiPiracy Technologies. All Rights Reserved.</p>
-      {% block footer %}{% endblock %}
-    </div>
-  </footer>
+						{% if 'name' in session %}
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.10.2.min.js"><\/script>')</script>
-  <script type="text/javascript" src="/static/js/libs/video.js"></script>
-  <script type="text/javascript" src="/static/js/libs/flat-ui-2.2.2.min.js"></script>
-  <script type="text/javascript" src="/static/js/libs/bootstrap-3.3.5.min.js" defer></script>
-  <script type="text/javascript" src="/static/js/plugins.js" defer></script>
-  <script type="text/javascript" src="/static/js/script.js" defer></script>
+							<li 
+								{% if request.endpoint == 'movies' %} 
+									class="active" 
+								{% endif %}
+							>
+
+							<a href="{{ url_for('movies') }}">Movies</a></li>
+
+							<li 
+								{% if request.endpoint == 'shows' %} 
+									class="active" 
+								{% endif %}
+							>
+
+							<a href="{{ url_for('shows') }}">TV Shows</a></li>
+
+						{% endif %}
+
+					</ul>
+
+					<ul class="nav navbar-nav pull-right">
+
+						{% if 'name' in session %}
+
+							<li><a href="#">{{ session['name'] }}</a></li>
+							<li><a href="{{ url_for('logout') }}">Logout</a></li>
+
+						{% else %}
+
+							<li><a href="{{ url_for('register') }}">Signup</a></li>
+							<li><a href="{{ url_for('login') }}">Login</a></li>
+						
+						{% endif %}
+
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+
+		<!-- Begin page content -->
+		<main id="content" role="main" class="container">
+
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for message in messages %}
+
+						<div class="alert alert-block alert-error fade in">
+							<a class="close" data-dismiss="alert">&times;</a>
+							{{ message }}
+						</div>
+
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+
+			{% block content %}{% endblock %}
+
+		</main>
+
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">&copy; 2015 AntiPiracy Technologies. All Rights Reserved.</p>
+			{% block footer %}{% endblock %}
+		</div>
+	</footer>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.10.2.min.js"><\/script>')</script>
+	<script src="/static/js/libs/video.js"></script>
+	<script src="/static/js/libs/videojs-media-sources.js"></script>
+	<script src="/static/js/libs/videojs-hls.js"></script>
+	
+	<script src="/static/js/libs/flat-ui-2.2.2.min.js"></script>
+	<script src="/static/js/libs/bootstrap-3.3.5.min.js" defer></script>
+	<script src="/static/js/plugins.js" defer></script>
+	<script src="/static/js/script.js" defer></script>
+	
 </body>
 </html>

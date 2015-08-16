@@ -7,3 +7,12 @@
  * main.css.
  */
 
+.col-md-4{
+  padding:40px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+h1, h2{
+	display: inline;
+}

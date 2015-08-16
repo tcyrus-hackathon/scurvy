@@ -6,14 +6,15 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from logging import Formatter, FileHandler
 from models import db
 from forms import *
-
+from random import sample
 from encrypt import encrypt_video 
 
 app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
 
-VID_NAMES = ['gangnam_style'] * 6
+MOVIE_NAMES = ['gangnam_style'] * 9
+SHOW_NAMES = ['gangnam_style'] * 9
 
 # Login required decorator.
 def login_required(test):
@@ -34,11 +35,18 @@ def shutdown_session(exception=None):
 def index():
     return render_template('pages/index.html')
 
-@app.route('/videos')
+@app.route('/movies')
 @login_required
-def videos():
-    vid_names = VID_NAMES
-    return render_template('pages/videos.html', **locals())
+def movies():
+    vid_names = sample(MOVIE_NAMES, 9)
+    return render_template('pages/movies.html', **locals())
+
+@app.route('/shows')
+@login_required
+def shows():
+    vid_names = sample(SHOW_NAMES, 9)
+    return render_template('pages/shows.html', **locals())
+
 
 @app.route('/watch')
 @login_required
@@ -81,7 +89,7 @@ def register():
             db.session.commit()
             flash(u'Successfully Registered')
 
-            for name in VIDEOS:
+            for name in VID_NAMES:
                 encrypt_video(name, form.name.data, session['num']) #async
 
             return redirect(url_for('videos'))
