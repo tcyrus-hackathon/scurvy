@@ -16,3 +16,7 @@
 h1, h2{
 	display: inline;
 }
+
+p.lead{
+	font-size:20px;
+}
