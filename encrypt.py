@@ -1,15 +1,24 @@
 from PIL import Image
-import stepic, sys, os, threading
+import stepic
+import sys
+import os
 
 from moviepy.editor import *
 import moviepy.editor as mpy
 from moviepy.editor import VideoFileClip
 
+from concurrent.futures import ProcessPoolExecutor as Pool
+
 def encrypt_video(filename, username):
 	for th in threading.enumerate():
-		if th.getName()==(username+"_"+filename): return
-	if os.path.isfile("static/"+username+"_"+filename+".avi"): return
-	threading.Thread(target=video, args=(filename,username), name=(username+"_"+filename)).start()
+		if th.getName()==(username+"_"+filename): 
+			return
+
+	if os.path.isfile("static/"+username+"_"+filename+".avi"):
+		return
+
+	with Pool(max_workers=4) as executor:
+		executor.submit(video, filename, username)
 
 def video(filename, username):
 	# Orignal Video
