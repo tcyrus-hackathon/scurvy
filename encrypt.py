@@ -13,8 +13,8 @@ def encrypt_video(filename, username):
 	if os.path.isfile("static/"+username+"_"+filename+".avi"):
 		return
 
-	with Pool(max_workers=4) as executor:
-		executor.submit(video, filename, username)
+	executor = Pool(max_workers=4)
+	executor.submit(video, filename, username)
 
 def video(filename, username):
 	# Orignal Video
@@ -39,4 +39,4 @@ def video(filename, username):
 								  second_half.set_start(t0+1)])
 
 	# Write the result to a file (many options available !)
-	new_mov.write_videofile("static/"+username+"_"+filename+".avi", codec='png')
+	new_mov.write_videofile("static/videos/"+username+"_"+filename+".avi", codec='png')

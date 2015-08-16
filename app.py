@@ -1,6 +1,7 @@
 import logging, os
 from functools import wraps
-from flask import Flask, render_template, request, flash, session, redirect, url_for
+from flask import Flask, render_template, request, flash,\
+                     session, redirect, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from logging import Formatter, FileHandler
 from models import db
@@ -11,6 +12,8 @@ from encrypt import encrypt_video
 app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
+
+VIDEOS = ['gangnam_style']
 
 # Login required decorator.
 def login_required(test):
@@ -45,20 +48,24 @@ def videos():
 def watch():
     filename = request.args.get('video')
     username = session['name']
-    encrypt_video(filename, username)
     return render_template('pages/watch.html', **locals())
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
+
     if request.method == 'POST':
         if form.validate() == False:
             return render_template('forms/login.html', form=form)
         else:
             session['name'] = form.name.data
             flash(u'Successfully Logged In')
-            encrypt_video("gangnam_style", form.name.data)
+
+            for name in VIDEOS:
+                encrypt_video(name, form.name.data)
+
             return redirect(url_for('videos'))
+
     elif request.method == 'GET':
         return render_template('forms/login.html', form=form)
 
@@ -75,6 +82,7 @@ def register():
             db.session.commit()
             flash(u'Successfully Registered')
             return redirect(url_for('videos'))
+            
     elif request.method == 'GET':
         return render_template('forms/register.html', form=form)
 
@@ -100,7 +108,6 @@ if not app.debug:
     )
     app.logger.setLevel(logging.INFO)
     file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
     app.logger.info('errors')
 
 if __name__ == '__main__':
