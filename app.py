@@ -7,7 +7,7 @@ from logging import Formatter, FileHandler
 from models import db
 from forms import *
 
-from encrypt import encrypt_video
+from encrypt import encrypt_video 
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -59,7 +59,7 @@ def login():
             session['num'] = User.query.filter_by(name = form.name.data.lower()).first().num
             flash(u'Successfully Logged In')
 
-            for name in VIDEOS:
+            for name in VID_NAMES:
                 encrypt_video(name, form.name.data, session['num']) #async
 
             return redirect(url_for('videos'))
