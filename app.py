@@ -51,7 +51,8 @@ def shows():
 @app.route('/watch')
 @login_required
 def watch():
-    filename = request.args.get('video')
+    # filename = request.args.get('video')
+    filename = 'gangnam_style'
     username = session['name']
     return render_template('pages/watch.html', **locals())
 
@@ -66,6 +67,10 @@ def login():
             session['name'] = form.name.data.lower()
             session['num'] = User.query.filter_by(name = form.name.data.lower()).first().num
             flash(u'Successfully Logged In')
+
+
+            for name in set(MOVIE_NAMES + SHOW_NAMES):
+                encrypt_video(name, session['name'], session['num']) #async
 
             return redirect(url_for('movies'))
 
@@ -86,8 +91,8 @@ def register():
             db.session.commit()
             flash(u'Successfully Registered')
 
-            for name in MOVIE_NAMES + SHOW_NAMES:
-                encrypt_video(name, form.name.data, session['num']) #async
+            for name in set(MOVIE_NAMES + SHOW_NAMES):
+                encrypt_video(name, session['name'], session['num']) #async
 
             return redirect(url_for('movies'))
 

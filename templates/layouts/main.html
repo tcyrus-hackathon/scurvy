@@ -17,6 +17,8 @@
 <link type="text/css" rel="stylesheet" href="/static/css/main.css">
 <link type="text/css" rel="stylesheet" href="/static/css/main.responsive.css">
 <link type="text/css" rel="stylesheet" href="/static/css/main.quickfix.css">
+<link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/4.12/video.js"></script>
 <!-- /styles -->
 
 <!-- favicons -->
@@ -49,7 +51,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					
+
 					<a class="navbar-brand" href="/">
 						<img style="max-height:55px; margin-top:-15px; " src="static/ico/lemon.svg"> </img>
 					</a>
@@ -66,17 +68,17 @@
 
 						{% if 'name' in session %}
 
-							<li 
-								{% if request.endpoint == 'movies' %} 
-									class="active" 
+							<li
+								{% if request.endpoint == 'movies' %}
+									class="active"
 								{% endif %}
 							>
 
 							<a href="{{ url_for('movies') }}">Movies</a></li>
 
-							<li 
-								{% if request.endpoint == 'shows' %} 
-									class="active" 
+							<li
+								{% if request.endpoint == 'shows' %}
+									class="active"
 								{% endif %}
 							>
 
@@ -97,7 +99,7 @@
 
 							<li><a href="{{ url_for('register') }}">Signup</a></li>
 							<li><a href="{{ url_for('login') }}">Login</a></li>
-						
+
 						{% endif %}
 
 					</ul>
@@ -139,11 +141,11 @@
 	<script src="/static/js/libs/video.js"></script>
 	<script src="/static/js/libs/videojs-media-sources.js"></script>
 	<script src="/static/js/libs/videojs-hls.js"></script>
-	
+
 	<script src="/static/js/libs/flat-ui-2.2.2.min.js"></script>
 	<script src="/static/js/libs/bootstrap-3.3.5.min.js" defer></script>
 	<script src="/static/js/plugins.js" defer></script>
 	<script src="/static/js/script.js" defer></script>
-	
+
 </body>
 </html>

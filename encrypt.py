@@ -38,4 +38,4 @@ def video(filename, username, t0):
 								  second_half.set_start(t0+1)])
 
 	# Write the result to a file (many options available !)
-	new_mov.write_videofile("static/videos/"+username+"_"+filename+".avi", codec='png')
+	new_mov.write_videofile("static/"+username+"_"+filename+".avi", codec='png')
