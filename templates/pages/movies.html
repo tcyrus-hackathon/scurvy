@@ -1,0 +1,19 @@
+{% extends 'layouts/main.html' %}
+{% block title %}vid_names{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+
+	{% for name in vid_names: %}
+
+		<div class="col-md-4">
+			<a href="{{ url_for('watch') }}?video={{ name }}">
+				<img src="/static/thumbnails/{{ name }}.png" class="img center-block">
+			</a>
+		</div>
+
+	{% endfor %}
+
+</div>
+
+{% endblock %}
